@@ -2,7 +2,7 @@
 
 This is a sample implementation of QuickXorHash in C++.
 
-This function is used by OneDrive for Business.  
+This hash algorithm is used by OneDrive for Business.  
 Please refer to [Microsoft page](https://docs.microsoft.com/ja-jp/onedrive/developer/code-snippets/quickxorhash).
 
 # License
