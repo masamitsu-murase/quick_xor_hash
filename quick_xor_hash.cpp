@@ -65,9 +65,8 @@ void xor(block_t &lhs, const block_t &rhs)
     }
 }
 
-block_t hash(const std::string &filename)
+block_t quick_xor_hash(std::istream &input)
 {
-    std::ifstream input(filename.c_str(), std::ios::binary);
     uint64_t count = 0;
 
     const size_t BLOCK_UNIT_SIZE = BYTES_PER_BLOCK * 8;
@@ -114,6 +113,12 @@ block_t hash(const std::string &filename)
     return block;
 }
 
+block_t quick_xor_hash_file(const std::string &filename)
+{
+    std::ifstream input(filename.c_str(), std::ios::binary);
+    return quick_xor_hash(input);
+}
+
 int main(int argc, char *argv[])
 {
     if (argc != 2) {
@@ -122,7 +127,7 @@ int main(int argc, char *argv[])
     }
 
     try {
-        block_t result = hash(argv[1]);
+        block_t result = quick_xor_hash_file(argv[1]);
         for (auto it=std::crbegin(result); it!=std::crend(result); it++) {
             std::cout << std::hex << std::setw(2) << std::setfill('0') << static_cast<uint32_t>(*it);
         }
